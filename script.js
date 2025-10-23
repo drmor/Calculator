@@ -42,22 +42,28 @@ function populate(){
 };
 
 function operate(){
-
-};
-function add(){
-    output.textContent = " ";
     btnEqual.addEventListener("click", () =>{
-        answ = firstNum + secondNum;
-        
+        if (operatorChoice === "+"){
+            add();
+        } else if (operatorChoice === "-"){
+            subtract();
+        } else if (operatorChoice === "*"){
+            multiply();
+        } else if (operatorChoice === "/"){
+            divide();
+        };
     });
-    output.textContent = answ;
+};
+
+function add(){
+    return firstNum + secondNum;
 };
 function subtract(){
-
+    return firstNum - secondNum;
 };
 function multiply(){
-
+    return firstNum * secondNum;
 };
 function divide(){
-
+    return firstNum / secondNum;
 };
