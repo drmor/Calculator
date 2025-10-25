@@ -2,7 +2,7 @@ const btnNumbers = document.querySelector(".numbers");
 const btnOperators = document.querySelector(".operators");
 const btnEqual = document.querySelector(".equal");
 const outputBar = document.querySelector(".output");
-
+const btnClear = document.querySelector(".clear");
 
 let firstNum = 0;
 let answer = 0;
@@ -85,3 +85,11 @@ function divide(){
     answer = parseInt(firstNum) / parseInt(secondNum);
     return answer;
 };
+
+btnClear.addEventListener("click", () => {
+    firstNum = 0;
+    answer = 0;
+    secondNum = 0;
+    operatorChoice = null;
+    changeNum = false;
+});
