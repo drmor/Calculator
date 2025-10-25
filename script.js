@@ -21,8 +21,18 @@ function getValues(){
             changeNum = true;
         }
         if (secondNum && operatorChoice){
-            operate()
-            console.log(answer)
+            if (operatorChoice === "+"){
+                add();
+            } else if (operatorChoice === "-"){
+                subtract();
+            } else if (operatorChoice === "*"){
+                multiply();
+            } else if (operatorChoice === "/"){
+                divide();
+            };
+            firstNum = answer;
+            secondNum = 0;
+            operatorChoice = null;
         }
         operatorChoice = e.target.id;
         populate()
@@ -59,30 +69,30 @@ function operate(){
 function populate(){
     outputBar.textContent = answer; 
     if (firstNum){
-        outputBar.textContent = parseInt(firstNum);
+        outputBar.textContent = parseFloat(firstNum);
         if (operatorChoice){
-            outputBar.textContent = parseInt(firstNum) + " " + operatorChoice;
+            outputBar.textContent = parseFloat(firstNum) + " " + operatorChoice;
             if (secondNum){
-                outputBar.textContent = parseInt(firstNum) + " " + operatorChoice + " " + parseInt(secondNum);
+                outputBar.textContent = parseFloat(firstNum) + " " + operatorChoice + " " + parseFloat(secondNum);
             };
         };
     };
 };
 
 function add(){
-    answer = parseInt(firstNum) + parseInt(secondNum);
+    answer = parseFloat(firstNum) + parseFloat(secondNum);
     return answer;
 };
 function subtract(){
-    answer = parseInt(firstNum) - parseInt(secondNum);
+    answer = parseFloat(firstNum) - parseFloat(secondNum);
     return answer;
 };
 function multiply(){
-    answer = parseInt(firstNum) * parseInt(secondNum);
+    answer = parseFloat(firstNum) * parseFloat(secondNum);
     return answer;
 };
 function divide(){
-    answer = parseInt(firstNum) / parseInt(secondNum);
+    answer = parseFloat(firstNum) / parseFloat(secondNum);
     return answer;
 };
 
