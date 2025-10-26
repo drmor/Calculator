@@ -24,6 +24,13 @@ button{
     border-radius: 5px;
     color: white;
 }
+.numbers > .zero{
+    background-color: #878787;
+    border: 2px solid #616161;
+    width: 208px;
+    border-radius: 5px;
+    color: white;
+}
 .operators > button{
     background-color: #ff9d00;
     border: 2px solid #616161;
@@ -66,9 +73,22 @@ button{
     border-radius: 5px;
     color: white;
 }
-.clear > button{
-    background-color: #ff9d00;
+.clear > button,
+.allClear > button,
+.point > button {
+    background-color: #878787;
     border: 2px solid #616161;
     border-radius: 5px;
     color: white;
+}
+.allClear > button {
+    width: 208px;
+}
+.clear > button:hover,
+.allClear > button:hover,
+.point > button:hover,
+.numbers > button:hover, 
+.equal > button:hover,
+.operators > button:hover{
+    filter: brightness(90%);
 }
