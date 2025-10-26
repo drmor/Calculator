@@ -42,6 +42,10 @@ function getValues(){
         const elementId = e.target.id;
         if (!changeNum){
             firstNum += elementId;
+        } else if (answer && operatorChoice === ""){
+            firstNum = "";
+            answer = 0;
+            firstNum += elementId;
         } else {
             secondNum += elementId;
         };
@@ -61,7 +65,7 @@ function operate(){
             divide();
         };
         firstNum = answer;
-        secondNum = null;
+        secondNum = "";
         operatorChoice = null;
         populate();
     });
@@ -114,7 +118,6 @@ btnClear.addEventListener("click",  () => {
         return
     } else if (firstNum && !secondNum){
         firstNum = firstNum.slice(0, -1);
-        console.log('hi')
     } else if (firstNum && secondNum){
         secondNum = secondNum.slice(0, -1);
     };
