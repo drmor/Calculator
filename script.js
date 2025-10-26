@@ -14,6 +14,7 @@ let changeNum = false;
 getValues();
 operate();
 populate();
+float()
 function getValues(){
     btnOperators.addEventListener("click", (e) =>{
         if (!firstNum){
@@ -46,11 +47,12 @@ function getValues(){
             firstNum = "";
             answer = 0;
             firstNum += elementId;
-        } else {
-            secondNum += elementId;
+        } else{
+            secondNum += elementId;  
         };
         populate()
     });
+    keyboard()
 };
 
 function operate(){
@@ -122,7 +124,70 @@ btnClear.addEventListener("click",  () => {
         secondNum = secondNum.slice(0, -1);
     };
 });
-
-btnPoint.addEventListener("click", () =>{
-
-});
+function float(){
+    btnPoint.addEventListener("click", () =>{
+        if (!firstNum){
+            return
+        } else if (firstNum && !secondNum){
+            firstNum += ".";
+        } else if (firstNum && secondNum){
+            secondNum += ".";
+        };
+    }, { once: true });
+}
+function keyboard(){
+    document.addEventListener('keydown', function(event) {
+        if ("0123456789".includes(event.key)){
+            if (!changeNum){
+                firstNum += event.key;
+            } else if (answer && operatorChoice === ""){
+                firstNum = "";
+                answer = 0;
+                firstNum += event.key;
+            } else{
+                secondNum += event.key;  
+            };
+        } else if ("+-/*".includes(event.key)){
+            if (!firstNum){
+                changeNum = false;
+            } else {
+                changeNum = true;
+            }
+            if (secondNum && operatorChoice){
+                if (operatorChoice === "+"){
+                    add();
+                } else if (operatorChoice === "-"){
+                    subtract();
+                } else if (operatorChoice === "*"){
+                    multiply();
+                } else if (operatorChoice === "/"){
+                    divide();
+                };
+                firstNum = answer;
+                secondNum = "";
+                operatorChoice = null;
+            }
+            operatorChoice = event.key;
+            populate()
+        } else if (event.key === "Backspace") {
+            if (!firstNum){
+                return
+            } else if (firstNum && !secondNum){
+                firstNum = firstNum.slice(0, -1);
+            } else if (firstNum && secondNum){
+                secondNum = secondNum.slice(0, -1);
+            };
+        } else if (".".includes(event.key)){
+            if (!firstNum){
+                return
+            } else if (firstNum && !secondNum){
+                firstNum += ".";
+            } else if (firstNum && secondNum){
+                secondNum += ".";
+            };
+        } else {
+            return
+        }
+        populate()
+    });
+}
