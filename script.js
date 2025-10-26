@@ -38,6 +38,7 @@ function getValues(){
         }
         operatorChoice = e.target.id;
         populate()
+        float()
     }); 
     btnNumbers.addEventListener("click", (e) =>{
         const elementId = e.target.id;
@@ -51,6 +52,7 @@ function getValues(){
             secondNum += elementId;  
         };
         populate()
+        float()
     });
     keyboard()
 };
@@ -70,6 +72,7 @@ function operate(){
         secondNum = "";
         operatorChoice = null;
         populate();
+        float()
     });
     
 };
@@ -129,8 +132,14 @@ function float(){
         if (!firstNum){
             return
         } else if (firstNum && !secondNum){
+            if (firstNum.includes(".")) {
+                    return
+                };
             firstNum += ".";
         } else if (firstNum && secondNum){
+            if (secondNum.includes(".")) {
+                    return
+                };
             secondNum += ".";
         };
     }, { once: true });
@@ -181,8 +190,14 @@ function keyboard(){
             if (!firstNum){
                 return
             } else if (firstNum && !secondNum){
+                if (firstNum.includes(".")) {
+                    return
+                };
                 firstNum += ".";
             } else if (firstNum && secondNum){
+                if (secondNum.includes(".")) {
+                    return
+                };
                 secondNum += ".";
             };
         } else {
