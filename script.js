@@ -11,17 +11,20 @@ let answer = 0;
 let secondNum = "";
 let operatorChoice;
 let changeNum = false;
+
 getValues();
 operate();
 populate();
-float()
+float();
+
+// Getting values from buttons
 function getValues(){
     btnOperators.addEventListener("click", (e) =>{
         if (!firstNum){
             changeNum = false;
         } else {
             changeNum = true;
-        }
+        };
         if (secondNum && operatorChoice){
             if (operatorChoice === "+"){
                 add();
@@ -37,8 +40,8 @@ function getValues(){
             operatorChoice = null;
         }
         operatorChoice = e.target.id;
-        populate()
-        float()
+        populate();
+        float();
     }); 
     btnNumbers.addEventListener("click", (e) =>{
         const elementId = e.target.id;
@@ -51,12 +54,13 @@ function getValues(){
         } else{
             secondNum += elementId;  
         };
-        populate()
-        float()
+        populate();
+        float();
     });
-    keyboard()
+    keyboard();
 };
 
+// Sending values to math operators
 function operate(){
     btnEqual.addEventListener("click", () =>{
         if (operatorChoice === "+"){
@@ -72,10 +76,11 @@ function operate(){
         secondNum = "";
         operatorChoice = null;
         populate();
-        float()
+        float();
     });
-    
 };
+
+// Populate any your steps to output bar
 function populate(){
     outputBar.textContent = answer; 
     if (firstNum){
@@ -89,27 +94,32 @@ function populate(){
     };
 };
 
+// Math operators (+, -, *, /)
 function add(){
     answer = parseFloat(firstNum) + parseFloat(secondNum);
     return answer;
 };
+
 function subtract(){
     answer = parseFloat(firstNum) - parseFloat(secondNum);
     return answer;
 };
+
 function multiply(){
     answer = parseFloat(firstNum) * parseFloat(secondNum);
     return answer;
 };
+
 function divide(){
     if (firstNum && operatorChoice === "/" && secondNum === "0"){
-        answer = "Error"
+        answer = "Error";
     } else {
         answer = parseFloat(firstNum) / parseFloat(secondNum);
     };
     return answer;
 };
 
+// Button that clears everything
 btnAllClear.addEventListener("click", () => {
     firstNum = "";
     answer = 0;
@@ -118,32 +128,37 @@ btnAllClear.addEventListener("click", () => {
     changeNum = false;
 });
 
+// Button that clears last input
 btnClear.addEventListener("click",  () => {
     if (!firstNum){
-        return
+        return;
     } else if (firstNum && !secondNum){
         firstNum = firstNum.slice(0, -1);
     } else if (firstNum && secondNum){
         secondNum = secondNum.slice(0, -1);
     };
 });
+
+// Float number logic
 function float(){
     btnPoint.addEventListener("click", () =>{
         if (!firstNum){
-            return
+            return;
         } else if (firstNum && !secondNum){
             if (firstNum.includes(".")) {
-                    return
+                    return;
                 };
             firstNum += ".";
         } else if (firstNum && secondNum){
             if (secondNum.includes(".")) {
-                    return
+                    return;
                 };
             secondNum += ".";
         };
     }, { once: true });
-}
+};
+
+// Getting values from keyboard
 function keyboard(){
     document.addEventListener('keydown', function(event) {
         if ("0123456789".includes(event.key)){
@@ -161,7 +176,7 @@ function keyboard(){
                 changeNum = false;
             } else {
                 changeNum = true;
-            }
+            };
             if (secondNum && operatorChoice){
                 if (operatorChoice === "+"){
                     add();
@@ -175,12 +190,12 @@ function keyboard(){
                 firstNum = answer;
                 secondNum = "";
                 operatorChoice = null;
-            }
+            };
             operatorChoice = event.key;
-            populate()
+            populate();
         } else if (event.key === "Backspace") {
             if (!firstNum){
-                return
+                return;
             } else if (firstNum && !secondNum){
                 firstNum = firstNum.slice(0, -1);
             } else if (firstNum && secondNum){
@@ -188,21 +203,21 @@ function keyboard(){
             };
         } else if (".".includes(event.key)){
             if (!firstNum){
-                return
+                return;
             } else if (firstNum && !secondNum){
                 if (firstNum.includes(".")) {
-                    return
+                    return;
                 };
                 firstNum += ".";
             } else if (firstNum && secondNum){
                 if (secondNum.includes(".")) {
-                    return
+                    return;;
                 };
                 secondNum += ".";
             };
         } else {
             return
-        }
-        populate()
+        };
+        populate();
     });
-}
+};
