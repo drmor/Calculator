@@ -3,16 +3,16 @@ const btnOperators = document.querySelector(".operators");
 const btnEqual = document.querySelector(".equal");
 const outputBar = document.querySelector(".output");
 const btnClear = document.querySelector(".clear");
+const btnPoint = document.querySelector(".point");
 
-let firstNum = 0;
+let firstNum = "";
 let answer = 0;
-let secondNum = 0;
+let secondNum = "";
 let operatorChoice;
 let changeNum = false;
 getValues();
 operate();
 populate();
-
 function getValues(){
     btnOperators.addEventListener("click", (e) =>{
         if (!firstNum){
@@ -31,7 +31,7 @@ function getValues(){
                 divide();
             };
             firstNum = answer;
-            secondNum = 0;
+            secondNum = "";
             operatorChoice = null;
         }
         operatorChoice = e.target.id;
@@ -42,7 +42,7 @@ function getValues(){
         if (!changeNum){
             firstNum += elementId;
         } else {
-            secondNum += elementId || 0;
+            secondNum += elementId;
         };
         populate()
     });
@@ -62,18 +62,18 @@ function operate(){
         firstNum = answer;
         secondNum = null;
         operatorChoice = null;
-        populate()
+        populate();
     });
     
 };
 function populate(){
     outputBar.textContent = answer; 
     if (firstNum){
-        outputBar.textContent = parseFloat(firstNum);
+        outputBar.textContent = firstNum.toString().substring(0, 5);
         if (operatorChoice){
-            outputBar.textContent = parseFloat(firstNum) + " " + operatorChoice;
+            outputBar.textContent = firstNum + " " + operatorChoice;
             if (secondNum){
-                outputBar.textContent = parseFloat(firstNum) + " " + operatorChoice + " " + parseFloat(secondNum);
+                outputBar.textContent = firstNum + " " + operatorChoice + " " + secondNum;
             };
         };
     };
@@ -92,7 +92,11 @@ function multiply(){
     return answer;
 };
 function divide(){
-    answer = parseFloat(firstNum) / parseFloat(secondNum);
+    if (firstNum && operatorChoice === "/" && secondNum === "0"){
+        answer = "Error"
+    } else {
+        answer = parseFloat(firstNum) / parseFloat(secondNum);
+    };
     return answer;
 };
 
@@ -102,4 +106,8 @@ btnClear.addEventListener("click", () => {
     secondNum = 0;
     operatorChoice = null;
     changeNum = false;
+});
+
+btnPoint.addEventListener("click", () =>{
+
 });
